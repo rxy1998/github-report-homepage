@@ -1,334 +1,347 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>github report</title>
-        <h1>Github代码年度排行榜</h1>
-        <style type="text/css">
-            /*标题 h1 css*/
-            h1{
-                text-align: center;
-                font-family: Arial, Helvetica, sans-serif;
-            }
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>GitHub report</title>
+    <h1>GitHub年度代码排行榜</h1>
+    <style type="text/css">
+        /*标题 h1 css*/
+        h1{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            background-color: rgba(229, 244, 247, 0.699);
+        }
 
-            /*排名方式导航栏 nav css*/
-            body{
-                background-color: rgba(216, 216, 216, 0.685);
-            }
-            body, ul, li {
-                margin: 0;
-                padding: 0;
-            }
-            ul, li {
-                list-style: none;
-            }
-            .nav {
-                width: 990px;
-                height: 200px;
-                background:  rgb(210, 238, 245);
-                margin: 20px auto;
-                border-radius: 10px;
-                border: 2px solid rgb(96, 132, 145);
-            }
-            .nav ul li {
-                float: left;
-                width: 330px;
-                text-align: center;
-            }
-            .nav ul li a {
-                display: inline-block;
-                height: 40px;
-                font-family: Arial, Helvetica, sans-serif;
-                padding: 0 20px;
-                line-height: 40px;
-                text-decoration: none;
-            }
-            .nav ul li a:hover {
-                background: #aaa;
-            }
+        /*background*/
+        .container {
+            display: flex;
+            flex-direction: row;
+            width: auto;
+            height: auto;
+            background-color: rgba(229, 244, 247, 0.699);
+        }   
+        .item1 {
+            background-color: rgba(172, 200, 204, 0.705);
+            width: auto;
+            height: auto;
+            border: 2px solid  rgb(90, 123, 136);
+            margin: 20px;
+            border-radius: 10px;
+        }
+        .item2 {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: center;
+            background-color: rgba(172, 200, 204, 0.705);
+            width: 1500px;
+            height: auto;
+            border: 2px solid  rgb(90, 123, 136);
+            margin: 20px;
+            padding-top: 30px;
+            border-radius: 10px;
+        }
 
-            /*地区导航栏 select css*/
-            ul, li {
-                margin: 0;
-                padding: 0;
-            }
-            ul, li {
-                list-style: none;
-            }
-            .select {
-                width: 900px;
-                height: 40px;
-                background: rgb(210, 238, 245);
-                margin: 20px auto;
-                border-radius: 10px;
-                border: 2px solid rgb(96, 132, 145);
-            }
-            .select ul li {
-                float: left;
-                width: 150px;
-                text-align: center;
-            }
-            .select ul li a {
-                display: inline-block;
-                height: 40px;
-                font-family: Arial, Helvetica, sans-serif;
-                padding: 0 20px;
-                line-height: 40px;
-                text-decoration: none;
-            }
-            .select ul li a:hover {
-                background: #aaa;
-            }
+        
+        body, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+        ul, li {
+            list-style: none;
+            float: left;
+            width: 400px;
+            text-align: start;
+        }
+        ul li a {
+            display: inline-block;
+            height: 40px;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 0 20px;
+            line-height: 40px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        #menu-checkbox1, #menu-checkbox, ul li a:hover {
+            background: #aaa;
+        }
 
-            /*排行单元 container css*/
-            .container {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-content: center;
-                text-align: center;
-                width: 400px;
-                height: 120px;
-                margin-bottom: -35px;
-                background-color: rgb(210, 238, 245);
-                border-top: 2px solid rgb(96, 132, 145);
-                border-left: 2px solid rgb(96, 132, 145);
-                border-radius: 10px;
-                box-shadow: 2px 2px 5px black, inset 2px 2px 5px rgb(81, 111, 122);
-                transition: 1s ease-in-out;
-            }
-            .item {
-                background-color: rgb(210, 238, 245);;
-                width: 110px;
-                height: 100px;
-                margin: 10px;
-            }
+        /*排列方式选择栏*/
+        label{
+            display: inline-block;
+            height: 40px;
+            width: 300px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            padding: 0 20px;
+            line-height: 40px;
+            text-decoration: none;
+        }
+        .tag-list{
+            margin: 0px ;
+            padding: 0px;
+            width: 300px;
+        }
+        #menu-checkbox{
+            display: none;
+        }
+        #menu-checkbox:checked ~ .tag-list{
+            display: none;
+        }
+        li{
+            float: left;
+            margin: 2px;
+            list-style-type: none;
+        }
+        a {
+            text-decoration: none;
+        }
 
-            /*头像大小*/
-            img{
-                width: 100px;
-                height: 100px;
-            }
+        /*地区选择栏*/
+        .tag-list1{
+            margin: 0px ;
+            padding: 0px;
+            width: 300px;
+        }
+        #menu-checkbox1{
+            display: none;
+        }
+        #menu-checkbox1:checked ~ .tag-list1{
+            display: none;
+        }
+        li{
+            float: left;
+            margin: 2px;
+            list-style-type: none;
+        }
+        a {
+            text-decoration: none;
+        }
 
-            /*排行榜布局 list css*/
-            body, ul, li {
-                margin: 0;
-                padding: 0;
-            }
-            ul, li {
-                list-style: none;
-            }
-            .rank {
-                width: 400px;
-                height: 200px;
-                margin: auto;
-                border-radius: 10px;
-            }
-            .rank ul li {
-                float: left;
-                width: 330px;
-                text-align: center;
-            }
-            .rank ul li a {
-                display: inline-block;
-                height: 40px;
-                font-family: Arial, Helvetica, sans-serif;
-                padding: 0 ;
-                line-height: 40px;
-                text-decoration: none;
-            }
-            .rank ul li a:hover {
-                background: #aaa;
-            }
-            
-            
-            
-            
-            /*信息布局*/
-            p{
-                font-size: 15px;
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            span {
-                font-size: 10px;
-            }
-            .name {
-                text-align: start;
-            }
-            .location {
-                text-align: center;
-            }
-            .star, .follower{
-                display: flex;
-                text-align: end;
-                padding-top: 50px;
-            }
-            svg{
-                color: darkgray;
-            }
+        /*排行单元 container css*/
+        .container1 {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-content: center;
+            text-align: center;
+            width: auto;
+            height: auto;
+            margin-bottom: 10px;
+            padding: 5px;
+            background-color: rgba(174, 217, 223, 0.699);
+            border-top: 2px solid rgb(96, 132, 145);
+            border-left: 2px solid rgb(96, 132, 145);
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px black, inset 2px 2px 5px rgb(81, 111, 122);
+            transition: 1s ease-in-out;
+        }
+        .item {
+            width: auto;
+            height: auto;
+        }
 
-            /*动画*/
-            .container:hover {
-                width: 400px;
-                height: 130px;
-                opacity: 1;
-            }
+        .itemimg {
+            width: 100px;
+            height: 100px;
+            margin: 15px;
+            margin-right: -50px;
+            margin-left: -5px;
+        }
+        /*头像大小*/
+        img{
+            width: 100px;
+            height: 100px;
+        }
+        /*信息布局*/
+        p{
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .name {
+            font-size: 15px;
+            text-align: start;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        span{
+            font-size: 13px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-        </style>
-    </head>
-    <body>
-        <div class="nav">
-            <ul>
-                <li><a href="">2019年使用编程语言最多的前100个人</a></li>
-                <li><a href="">2019年提交代码仓库最多的前100个人</a></li>
-                <li><a href="">2019年提交代码次数最多的前100个人</a></li>
-                <li><a href="">2019年活跃天数最多的前100个人</a></li>
-                <li><a class="" href="">2019年增加代码最多的前100个人</a></li>
-                <li><a class="" href="">2019年删除代码最多的前100个人</a></li>
-                <li><a class="" href="">2019年改动代码最多的前100个人</a></li>
-                <li><a class="" href="">2019年一天提交代码数量最多的前100人</a></li>
-                <li><a class="" href="">2019年睡觉最晚提交代码的前100个人</a></li>
-                <li><a class="" href="">2019年向某一个项目提交代码最专一的前100个人</a></li>
-                <li><a class="" href="">提交代码时间统计图</a></li>
-                <li><a class="" href="">2019年参与问题讨论最多的前100个人</a></li>
-                <li><a class="" href="">2019年收藏仓库最多的前100个人</a></li>
-                <li><a class="" href="">年度语言排名</a></li>
-            </ul>
+        svg{
+            color: darkgray;
+        }
+
+        /*动画*/
+        .container1:hover {
+            height: 130px;
+            opacity: 1;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item1">
+        <label for="menu-checkbox">排名方式</label>
+        <input id="menu-checkbox" type="checkbox" name="" value="">
+        <div class="tag-list">
+        <ul>
+            <li><a href="">2019年使用编程语言最多的前100个人</a></li>
+            <li><a href="">2019年提交代码仓库最多的前100个人</a></li>
+            <li><a href="">2019年提交代码次数最多的前100个人</a></li>
+            <li><a href="">2019年活跃天数最多的前100个人</a></li>
+            <li><a class="" href="">2019年增加代码最多的前100个人</a></li>
+            <li><a class="" href="">2019年删除代码最多的前100个人</a></li>
+            <li><a class="" href="">2019年改动代码最多的前100个人</a></li>
+            <li><a class="" href="">2019年一天提交代码数量最多的前100人</a></li>
+            <li><a class="" href="">2019年睡觉最晚提交代码的前100个人</a></li>
+            <li><a class="" href="">2019年向某一个项目提交代码最专一的前100个人</a></li>
+            <li><a class="" href="">提交代码时间统计图</a></li>
+            <li><a class="" href="">2019年参与问题讨论最多的前100个人</a></li>
+            <li><a class="" href="">2019年收藏仓库最多的前100个人</a></li>
+            <li><a class="" href="">年度语言排名</a></li>
+        </ul>
         </div>
 
-        <div class="select">
-            <ul>
-                <li><a href="">全国范围</a></li>
-                <li><a href="">东南地区</a></li>
-                <li><a href="">东北地区</a></li>
-                <li><a href="">西北地区</a></li>
-                <li><a href="">西南地区</a></li>
-                <li><a href="">海外地区</a></li>
-            </ul>
+        <label for="menu-checkbox1">地区</label>
+        <input id="menu-checkbox1" type="checkbox" name="" value="">
+        <div class="tag-list1">
+        <ul>
+            <li><a href="">全国范围</a></li>
+            <li><a href="">东南地区</a></li>
+            <li><a href="">东北地区</a></li>
+            <li><a href="">西北地区</a></li>
+            <li><a href="">西南地区</a></li>
+            <li><a href="">海外地区</a></li>
+        </ul>
         </div>
-
-        <div class="rank">
-            <ul>
-                <li><a href="">
-                    <div class="container">
-                        <div class="item">
-                            <a href="">
-                                <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=574187562,723308139&fm=26&gp=0.jpg" loading="wait" title="No.1" alt="No.1">
-                            </a>
-                        </div>
-        
-                        <div class="item">
-                            <p class="name">1. 排名第一的人</p>
-                            <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path>
-                            </svg>
-                            <span class="localtion">地区1</span>
-                                <a href=" " target="_blank" title="public repositories">
-                                    <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path>
-                                    </svg>
-                                    <span>仓库1</span>
-                                </a>
-                        </div>
-        
-                        <div class="item">
-                            <div class="followers" title="followers">
-                                <svg height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
-                                </svg>
-                                <span>star1</span>
-                      
-                                <svg viewBox="0 0 16 16" version="1.1" width="12" height="12">
-                                    <path fill-rule="evenodd" d="M16 12.999c0 .439-.45 1-1 1H7.995c-.539 0-.994-.447-.995-.999H1c-.54 0-1-.561-1-1 0-2.634 3-4 3-4s.229-.409 0-1c-.841-.621-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.442.58 2.5 3c.058 2.41-.159 2.379-1 3-.229.59 0 1 0 1s1.549.711 2.42 2.088C9.196 9.369 10 8.999 10 8.999s.229-.409 0-1c-.841-.62-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.437.581 2.495 3c.059 2.41-.158 2.38-1 3-.229.59 0 1 0 1s3.005 1.366 3.005 4z"></path>
-                                </svg>
-                                <span>关注1</span>
-                            </div>
-                        </div>
-                    </div>
-                </a></li>
-                
-                
-                <li><a href="">
-                    <div class="container">
-                        <div class="item">
-                            <a href="">
-                                <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=574187562,723308139&fm=26&gp=0.jpg" loading="wait" title="No.1" alt="No.1">
-                            </a>
-                        </div>
-        
-                        <div class="item">
-                            <p class="name">2. 排名第二的人</p>
-                            <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path>
-                            </svg>
-                            <span class="localtion">地区2</span>
-                                <a href=" " target="_blank" title="public repositories">
-                                    <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path>
-                                    </svg>
-                                    <span>仓库2</span>
-                                </a>
-                        </div>
-        
-                        <div class="item">
-                            <div class="followers" title="followers">
-                                <svg height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
-                                </svg>
-                                <span>star2</span>
-                      
-                                <svg viewBox="0 0 16 16" version="1.1" width="12" height="12">
-                                    <path fill-rule="evenodd" d="M16 12.999c0 .439-.45 1-1 1H7.995c-.539 0-.994-.447-.995-.999H1c-.54 0-1-.561-1-1 0-2.634 3-4 3-4s.229-.409 0-1c-.841-.621-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.442.58 2.5 3c.058 2.41-.159 2.379-1 3-.229.59 0 1 0 1s1.549.711 2.42 2.088C9.196 9.369 10 8.999 10 8.999s.229-.409 0-1c-.841-.62-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.437.581 2.495 3c.059 2.41-.158 2.38-1 3-.229.59 0 1 0 1s3.005 1.366 3.005 4z"></path>
-                                </svg>
-                                <span>关注2</span>
-                            </div>
-                        </div>
-                    </div>
-                </a></li>
+    </div>
 
 
-                <li><a href="">
-                    <div class="container">
-                        <div class="item">
-                            <a href="">
-                                <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=574187562,723308139&fm=26&gp=0.jpg" loading="wait" title="No.1" alt="No.1">
-                            </a>
-                        </div>
-        
-                        <div class="item">
-                            <p class="name">3. 排名第三的人</p>
-                            <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path>
-                            </svg>
-                            <span class="localtion">地区3</span>
-                                <a href=" " target="_blank" title="public repositories">
-                                    <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path>
-                                    </svg>
-                                    <span>仓库3</span>
+        <div class="item2">
+            <div class="rank">
+                <ul>
+                    <li>
+                        <div class="container1">
+                            <div class="itemimg">
+                                <a href="">
+                                    <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=574187562,723308139&fm=26&gp=0.jpg" loading="wait" title="No.1" alt="No.1">
                                 </a>
-                        </div>
-        
-                        <div class="item">
-                            <div class="followers" title="followers">
-                                <svg height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
-                                </svg>
-                                <span>star3</span>
-                      
-                                <svg viewBox="0 0 16 16" version="1.1" width="12" height="12">
-                                    <path fill-rule="evenodd" d="M16 12.999c0 .439-.45 1-1 1H7.995c-.539 0-.994-.447-.995-.999H1c-.54 0-1-.561-1-1 0-2.634 3-4 3-4s.229-.409 0-1c-.841-.621-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.442.58 2.5 3c.058 2.41-.159 2.379-1 3-.229.59 0 1 0 1s1.549.711 2.42 2.088C9.196 9.369 10 8.999 10 8.999s.229-.409 0-1c-.841-.62-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.437.581 2.495 3c.059 2.41-.158 2.38-1 3-.229.59 0 1 0 1s3.005 1.366 3.005 4z"></path>
-                                </svg>
-                                <span>关注3</span>
                             </div>
+            
+                            <div class="item">
+                                <p class="name">1. 排名第一的人</p>
+                                <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path>
+                                </svg>
+                                <span class="localtion">地区1</span>
+                                    <a href=" " target="_blank" title="public repositories">
+                                        <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path>
+                                        </svg>
+                                        <span>仓库1</span>
+                                    </a>
+                                    <div class="followers" title="followers">
+                                        <svg height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+                                        </svg>
+                                        <span>star1</span>
+                                    <a href=" " target="_blank" title="public repositories">
+                                        <svg viewBox="0 0 16 16" version="1.1" width="12" height="12">
+                                            <path fill-rule="evenodd" d="M16 12.999c0 .439-.45 1-1 1H7.995c-.539 0-.994-.447-.995-.999H1c-.54 0-1-.561-1-1 0-2.634 3-4 3-4s.229-.409 0-1c-.841-.621-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.442.58 2.5 3c.058 2.41-.159 2.379-1 3-.229.59 0 1 0 1s1.549.711 2.42 2.088C9.196 9.369 10 8.999 10 8.999s.229-.409 0-1c-.841-.62-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.437.581 2.495 3c.059 2.41-.158 2.38-1 3-.229.59 0 1 0 1s3.005 1.366 3.005 4z"></path>
+                                        </svg>
+                                        <span>关注1</span>
+                                    </a>
+                                    </div>
+                            </div>
+            
                         </div>
-                    </div>
-                </a></li>
-            </ul>
+                    </li>
+                    
+                    
+                    <li>
+                        <div class="container1">
+                            <div class="itemimg">
+                                <a href="">
+                                    <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=574187562,723308139&fm=26&gp=0.jpg" loading="wait" title="No.1" alt="No.1">
+                                </a>
+                            </div>
+            
+                            <div class="item">
+                                <p class="name">1. 排名第二的人</p>
+                                <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path>
+                                </svg>
+                                <span class="localtion">地区2</span>
+                                    <a href=" " target="_blank" title="public repositories">
+                                        <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path>
+                                        </svg>
+                                        <span>仓库2</span>
+                                    </a>
+                                    <div class="followers" title="followers">
+                                        <svg height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+                                        </svg>
+                                        <span>star2</span>
+                                    <a href=" " target="_blank" title="public repositories">
+                                        <svg viewBox="0 0 16 16" version="1.1" width="12" height="12">
+                                            <path fill-rule="evenodd" d="M16 12.999c0 .439-.45 1-1 1H7.995c-.539 0-.994-.447-.995-.999H1c-.54 0-1-.561-1-1 0-2.634 3-4 3-4s.229-.409 0-1c-.841-.621-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.442.58 2.5 3c.058 2.41-.159 2.379-1 3-.229.59 0 1 0 1s1.549.711 2.42 2.088C9.196 9.369 10 8.999 10 8.999s.229-.409 0-1c-.841-.62-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.437.581 2.495 3c.059 2.41-.158 2.38-1 3-.229.59 0 1 0 1s3.005 1.366 3.005 4z"></path>
+                                        </svg>
+                                        <span>关注2</span>
+                                    </a>
+                                    </div>
+                            </div>
+            
+                        </div>
+                    </li>
+    
+    
+                    <li>
+                        <div class="container1">
+                            <div class="itemimg">
+                                <a href="">
+                                    <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=574187562,723308139&fm=26&gp=0.jpg" loading="wait" title="No.1" alt="No.1">
+                                </a>
+                            </div>
+            
+                            <div class="item">
+                                <p class="name">3. 排名第三的人</p>
+                                <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path>
+                                </svg>
+                                <span class="localtion">地区3</span>
+                                    <a href=" " target="_blank" title="public repositories">
+                                        <svg viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path>
+                                        </svg>
+                                        <span>仓库3</span>
+                                    </a>
+                                    <div class="followers" title="followers">
+                                        <svg height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+                                        </svg>
+                                        <span>star3</span>
+                                    <a href=" " target="_blank" title="public repositories">
+                                        <svg viewBox="0 0 16 16" version="1.1" width="12" height="12">
+                                            <path fill-rule="evenodd" d="M16 12.999c0 .439-.45 1-1 1H7.995c-.539 0-.994-.447-.995-.999H1c-.54 0-1-.561-1-1 0-2.634 3-4 3-4s.229-.409 0-1c-.841-.621-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.442.58 2.5 3c.058 2.41-.159 2.379-1 3-.229.59 0 1 0 1s1.549.711 2.42 2.088C9.196 9.369 10 8.999 10 8.999s.229-.409 0-1c-.841-.62-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.437.581 2.495 3c.059 2.41-.158 2.38-1 3-.229.59 0 1 0 1s3.005 1.366 3.005 4z"></path>
+                                        </svg>
+                                        <span>关注3</span>
+                                    </a>
+                                    </div>
+                            </div>
+            
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-        
-        
-        
-    </body>
+      
+    </div>
+  </body>
 </html>
